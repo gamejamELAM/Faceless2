@@ -4,9 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharController : MonoBehaviour {
-    Rigidbody2D myChar;
 
+    
+    Rigidbody2D myChar;
     Animator charAnim;
+
+    public float speed;
+    public float jumpSpeed;
+    public float gravity = 10.0f;
+
+    Vector3 moveDirection = Vector3.zero;
 
     public Transform groundCheck;
 
@@ -36,6 +43,16 @@ public class CharController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        //check to see if 'groundcheck' transform is colliding with ground
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, ground);
+        //tell animator if we are on the ground or not by updating our ground parameter 
+        charAnim.SetBool("ground", isGrounded);
+
+        if (isGrounded)
+        {
+            doubleJump = false;
+        }
+        charAnim.SetFloat("verticalSpeed", myChar.velocity.y);
+      
 	}
 }
