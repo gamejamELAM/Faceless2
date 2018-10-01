@@ -28,6 +28,8 @@ public class CharController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        myChar = GetComponent<Rigidbody2D> ();
+        charAnim = GetComponent<Animator> ();
 
 		
 	}
